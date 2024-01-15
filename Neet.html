@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allen NEET</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/bootstrap-5.3.0-alpha1-dist/css/bootstrap-grid.min.css">
+
+    <link rel="stylesheet" href="assets/css/AllenJee.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        /*=============== GOOGLE FONTS ===============*/
+        @import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Red+Hat+Display:wght@400;700;900&display=swap");
+
+        /*=============== VARIABLES CSS ===============*/
+        :root {
+            --header-height: 3.5rem;
+
+            /*========== Colors ==========*/
+            /*Color mode HSL(hue, saturation, lightness)*/
+            --first-color: hsl(207, 65%, 65%);
+            --title-color: hsl(207, 4%, 16%);
+            --text-color: hsl(207, 4%, 28%);
+            --text-color-light: hsl(207, 4%, 56%);
+            --body-color: hsl(207, 4%, 99%);
+            --container-color: hsl(207, 4%, 95%);
+            --main-color: #c18f2b;
+            --light-color: #09c3e2;
+
+            /*========== Font and typography ==========*/
+            /*.5rem = 8px | 1rem = 16px ...*/
+            --body-font: 'Red Hat Display', sans-serif;
+            --second-font: 'Kaushan Script', cursive;
+            --biggest-font-size: 2rem;
+            --bigger-font-size: 1.5rem;
+            --big-font-size: 1.25rem;
+            --h1-font-size: 1.5rem;
+            --h2-font-size: 1.25rem;
+            --h3-font-size: 1rem;
+            --normal-font-size: .938rem;
+            --small-font-size: .813rem;
+            --smaller-font-size: .75rem;
+            --item-size: 0.8rem;
+            /*========== Font weight ==========*/
+            --font-bold: 700;
+            --font-black: 900;
+
+            /*========== z index ==========*/
+            --z-tooltip: 10;
+            --z-fixed: 100;
+        }
+
+        /* Responsive typography */
+        @media screen and (min-width: 1024px) {
+            :root {
+                --biggest-font-size: 6rem;
+                --bigger-font-size: 3.5rem;
+                --big-font-size: 2.75rem;
+                --h1-font-size: 2.25rem;
+                --h2-font-size: 1.5rem;
+                --h3-font-size: 1.25rem;
+                --normal-font-size: 1rem;
+                --small-font-size: .875rem;
+                --smaller-font-size: .813rem;
+            }
+        }
+
+        /*=============== BASE ===============*/
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body,
+        button,
+        input {
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+        }
+
+        body {
+            background-color: black;
+            color: var(--text-color);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--title-color);
+            font-weight: var(--font-bold);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* REUSABLE CSS */
+        .container {
+            max-width: 1124px;
+            margin-right: 1.5rem;
+            margin-left: 1.5rem;
+        }
+
+        .section {
+            padding: 4.5rem 0 2rem;
+        }
+
+        .section__data {
+            display: flex;
+            flex-direction: column;
+            row-gap: .75rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section__title,
+        .section__title-border {
+            text-align: center;
+            font-size: var(--big-font-size);
+            letter-spacing: 1.5px;
+        }
+
+        .section__title{
+            color: #fff;
+        }
+        .section__subtitle {
+            font-size: var(--h2-font-size);
+            font-family: var(--second-font);
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            color: var(--first-color);
+            /* transform: rotate(-2deg); */
+        }
+
+        .section__titles {
+            display: flex;
+            column-gap: .75rem;
+            justify-content: center;
+        }
+
+        .section__title-border {
+            -webkit-text-stroke: 1px var(--text-color);
+            color: transparent;
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .main {
+            overflow: hidden;
+            /* For animation ScrollReveal */
+        }
+
+        .color-red {
+            color: hsl(0, 80%, 64%);
+        }
+
+        .color-green {
+            color: var(--first-color);
+        }
+
+
+        /*=============== ABOUT ===============*/
+        .about {
+            position: relative;
+            padding-bottom: 0;
+        }
+
+        .about__container {
+            padding-top: 4rem;
+            row-gap: 3rem;
+        }
+
+        .about__data {
+            text-align: center;
+        }
+
+        .about__title {
+            font-size: var(--bigger-font-size);
+            -webkit-text-stroke: 1px var(--title-color);
+            color: transparent;
+        }
+
+        .about__subtitle {
+            font-size: var(--biggest-font-size);
+            font-weight: var(--font-black);
+            margin: .5rem 0;
+        }
+
+        .about__title,
+        .about__subtitle {
+            letter-spacing: 1.5px;
+        }
+
+        .about__description {
+            color: aliceblue;
+            margin-bottom: 2.5rem;
+        }
+
+        @media screen and (min-width: 340px) {
+            .container {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            .section__titles {
+                flex-direction: column;
+                row-gap: .25rem;
+            }
+
+        }
+
+        @media screen and (min-width: 1023px) {
+            .section {
+                padding: 1rem 0 0;
+            }
+        }
+
+        @media screen and (min-width: 1150px) {
+            .container {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--==================== ABOUT  ====================-->
+    <section class="about section" id="about">
+        <div class="about__container container grid">
+            <div class="about__data">
+                <h1 class="section__title">ALLEN STUDY MATERIALS</h1>
+                <h2 class="section__subtitle">NEET</h2>
+
+                <p class="about__description">
+                    Hello Everyone, We are Association Family. Motto
+                    of this organization is "UNITED WE STAND, DIVIDED WE FALL".
+                    Stay in touch with us, we are always for you
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="row mt-5">
+
+
+        <div class="accordion accordion-flush container" id="accordionFlushExample">
+
+
+            <div class="d-md-flex d-flex-none col-12 accordian-buttons">
+
+                <h3 class="accordion-header" id="flush-heading-1"><button
+                        class="accordion-button footer-menu-heading text-white collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-collapse-1" aria-expanded="false"
+                        aria-controls="flush-collapse-1">Chemistry</button></h3>
+                <h3 class="accordion-header" id="flush-heading-2"><button
+                        class="accordion-button collapsed footer-menu-heading text-white" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-collapse-2" aria-expanded="false"
+                        aria-controls="flush-collapse-2">Physics</button></h3>
+                <h3 class="accordion-header" id="flush-heading-3"><button
+                        class="accordion-button collapsed footer-menu-heading text-white" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-collapse-3" aria-expanded="false"
+                        aria-controls="flush-collapse-3">Mathematics</button></h3>
+                <h3 class="accordion-header" id="flush-heading-4"><button
+                        class="accordion-button collapsed footer-menu-heading text-white" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-collapse-4" aria-expanded="false"
+                        aria-controls="flush-collapse-4">Allen Test Series</button></h3>
+            </div>
+
+
+
+            <div class="accordion-item">
+
+                <div id="flush-collapse-1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <div class="d-md-flex ">
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title">Physical Chemistry</li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/ATOMIC STRUCTURE.pdf" target="_blank">Atomic Structure</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/ATOMIC STRUCTURE.pdf" target="_blank">Atomic Structure - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/CHEMICAL BONDING.pdf" target="_blank">Chemical Bonding</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/ATOMIC STRUCTURE.pdf" target="_blank">Chemical Bonding - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/CHEMICAL EQUILIBRIUM.pdf" target="_blank">Chemical Equilibrium</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/CHEMICAL EQUILIBRIUM.pdf" target="_blank">Chemical Equilibrium - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/CHEMICAL KINETICS.pdf" target="_blank">Chemical Kinetics</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/CHEMICAL KINETICS.pdf" target="_blank">Chemical Kinetics - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/CHEMICAL THERMODYNAMICS _ ENERGETICS.pdf" target="_blank">Thermodynamics</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/THERMODYNAMICS (CHEMISTRY).pdf" target="_blank">Thermodynamics - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/ELECTROCHEMISTRY.pdf" target="_blank">Electro-Chemistry</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/ELECTROCHEMISTRY.pdf" target="_blank">Electro-Chemistry - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/IONIC EQUILIBRIUM.pdf" target="_blank">Ionic Equilibrium</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/IONIC EQUILIBRIUM.pdf" target="_blank">Ionic Equilibrium - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/LIQUID SOLUTION.pdf" target="_blank">Liquid Solution</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/SOLUTIONS.pdf" target="_blank">Liquid Solution - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/SOLID STATE.pdf" target="_blank">Solid State</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/SOLID STATE.pdf" target="_blank">Solid State - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/SOME BASIC CONCEPT OF CHEMISTRY.pdf" target="_blank">Mole Concept</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/MOLE CONCEPT.pdf" target="_blank">Mole Concept - Exercise - 1</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/MOLE CONCEPT MODULE SOLUTIONS BB + EXERCISES.pdf" target="_blank">Mole Concept - Exercise - 2</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/SURFACE CHEMISTRY.pdf" target="_blank">Surface Chemistry</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY MODULE Exercises/SURFACE CHEMISTRY.pdf" target="_blank">Surface Chemistry - Exercise</a></li>
+                            </ul>
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title">Inorganic Chemistry</li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/ALLEN MODULES 2022-23/CHEMISTRY MODULES/CHEMISTRY THEORY/COORDINATION COMPOUND.pdf" target="_blank">Co-ordination Compound</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES (NEET)/" target="_blank">Co-ordination Chemistry - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/PERIODIC TABLE.pdf" target="_blank">Periodic Table</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/PERIODIC TABLE EXERCISE.pdf.pdf" target="_blank">Periodic Table - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Quantum Number _ Periodic Table.pdf" target="_blank">Quantum Number</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/HYDROGEN _ IT_S COMPOUND.pdf" target="_blank">Hydrogen & Its Compound</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/HYDROGEN _ IT_S COMPOUNDS EXERCISE.pdf" target="_blank">Hydrogen & Its Compound - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/S-BLOCK ELEMENTS.pdf" target="_blank">S - Block Elements</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/s-BLOCK EXERCISE.pdf" target="_blank">S - Block Elements - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/P-BLOCK ELEMENTS.pdf" target="_blank">P - Block Elements</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/p-Block Element.pdf" target="_blank">P - Block Elements - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/d _ f-BLOCK ELEMENTS.pdf" target="_blank">D & F - Block Elements</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/d AND f-BLOCK ELEMENTS EXERCISE.pdf" target="_blank">D & F - Block Elements - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/BORON FAMILY EXERCISE.pdf" target="_blank">Borons Family</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/CARBON FAMILY.pdf" target="_blank">Carbons Family</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/CARBON FAMILY EXERCISE.pdf" target="_blank">Carbons Family Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/FAMILY.pdf" target="_blank">Nitrogens Family</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/NITROGEN FAMILY EXERCISE.pdf" target="_blank">Nitrogens Family - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/OXYGEN FAMILY.pdf" target="_blank">Oxygens Family</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/OXYGEN FAMILY EXERCISE.pdf" target="_blank">Oxygens Family - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/HALOGENS FAMILY.pdf" target="_blank">Halogens Family</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/HALOGEN FAMILY EXERCISE.pdf" target="_blank">Halogens Family - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Metallurgy.pdf" target="_blank">Metallurgy</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/METALLURGY EXERCISE.pdf" target="_blank">Metallurgy - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/NOBLE GASES _ INERT GASES.pdf" target="_blank">Noble Gases_Inert Gases</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/NOBLE GASES _ INERT GASES EXERCISE.pdf" target="_blank">Noble Gases_Inert Gases - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/NOMENCLATURE.pdf" target="_blank">Nomenclature</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/NOMENCLATURE EXERCISE.pdf" target="_blank">Nomenclature - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Salt Analysis.pdf" target="_blank">Salt Analysisa</a></li>
+                                
+
+                            </ul>
+
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title">Organic Chemistry</li>
+
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Acidic Strength _ Basic Strength.pdf" target="_blank">Acidic & Basic Strength</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/ALCOHOL AND ETHERS.pdf" target="_blank">Alcohol and Ethers</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Aldol _ Similar Name Reaction.pdf" target="_blank">Named Reactions</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Aromatic Compounds.pdf" target="_blank">Aromatic Compounds</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Biomolecules.pdf" target="_blank">Biomolecules</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Carbonyl Compound.pdf" target="_blank">Carbonyl Compound</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/CARBOXYLIC ACID _ AMINES.pdf" target="_blank">Carboxylic acid & Amines</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Chemistry in Everyday life.pdf" target="_blank">Chemistry In Everyday Life</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Electronic Displacement Effects.pdf" target="_blank">Electronic Displacement Effect</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Hydrocarbon.pdf" target="_blank">Hydrocarbon</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Isomerism.pdf" target="_blank">Isomerism</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Oxidation.pdf" target="_blank">Oxidation</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Reduction.pdf" target="_blank">Reduction</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (CHEMISTRY)/Polymers _ POC and Sepration Techniques.pdf" target="_blank">Polymers</a></li>
+
+                                
+                            </ul>
+
+
+                            <!-- <ul class="list-unstyled col">
+                                <li class="megamenu-list-title"><a href="#">CLASS 12</a>
+                                </li>
+                                <li><a href="https://www.pw.live/topics-physics-class-twelve">Physics
+                                        Class 12 notes</a></li>
+                                <li><a href="https://www.pw.live/topics-chemistry-class-12">Chemistry
+                                        Class 12</a></li>
+                                <li><a href="https://www.pw.live/topics-mathematics-class-12">Maths
+                                        Notes Class 12</a></li>
+                                <li><a href="https://www.pw.live/topics-class-12-zoology">Zoology
+                                        class 12</a></li>
+                                <li><a href="https://www.pw.live/topics-botany-class-12">Class 12th
+                                        Botany Notes</a></li>
+                            </ul> -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+
+                <div id="flush-collapse-2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body footer-menu-2-margin">
+                        <div class="d-md-flex">
+                            <ul class="list-unstyled col">
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Atomic Structure Exercise.pdf" target="_blank">Atomic Structure - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/CALORIMETARY, THERMAL EXPANSION _ K.T.G. Exercise.pdf" target="_blank">Calorimetry, Thermal Expansion & K.T.G - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Current Electricity Exercise.pdf" target="_blank">Current Electricity - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Electrostatics and Electrodynamics.pdf" target="_blank">Electrostatics</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Electrostatics Exercise.pdf" target="_blank">Electrostatics - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Error in measurements _ instruments.pdf" target="_blank">Error in Measurments</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Fluid Mechanics.pdf" target="_blank">Fluid Mechanics</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Gravitation.pdf" target="_blank">Gravitation</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Heat.pdf" target="_blank">Heat - 1</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Heat -  2.pdf" target="_blank">Heat - 2</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Heat Exercise.pdf" target="_blank">Heat - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Kinematics.pdf" target="_blank">Kinematics</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/MAGNETIC EFFECT OF CURRENT _ MAGNETISM.pdf" target="_blank">Magnetic Effect Of Current</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Magnetic Effect of Current _ Magnetism Exercise.pdf" target="_blank">Magnetic Effect Of Current - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Magnetism.pdf" target="_blank">Magnetism</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Mechanics-1.pdf" target="_blank">Mechanics - 1</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Mechanics-2.pdf" target="_blank">Mechanics - 2</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Modern Physics-1.pdf" target="_blank">Modern Physics - 1</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Modern Physics-2.pdf" target="_blank">Modern Physics - 2</a></li>
+                            </ul>
+
+                            <ul class="list-unstyled col">
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/MOTION IN-1D PROJECTILE _ CIRCULAR MOTION.pdf" target="_blank">Motion in 1D_Projectile & Circular Motion</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/PROJECTILE MOTION Exercise.pdf" target="_blank">Motion in 1D_Projectile & Circular Motion - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Newtons Law Of Motion.pdf" target="_blank">Newtons Laws of Motion</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Ray Optics.pdf" target="_blank">Ray Optics</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Ray Optics Exercise.pdf" target="_blank">Ray Optics - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Simple Harmonic Motion.pdf" target="_blank">Simple Harmonic Motion</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Thermal Physics.pdf" target="_blank">Thermal Physics</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Thermodynamic Exercise.pdf" target="_blank">Thermodynamics - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Wave and Wave Optics.pdf" target="_blank">Wave and Wave Optics</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Wave Optics.pdf" target="_blank">Wave Optics</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Wave Optics Exercise.pdf" target="_blank">Wave Optics - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/Wave Theory, Sound Waves _ Doppler Effect Exercise.pdf" target="_blank">Sound Waves and Doppler Effect - Exercise</a></li>
+                                <li><a href="assets/Study Material/ALLEN MODULES/JEE (PHYSICS)/WORK ENERGY POWER Exercise.pdf" target="_blank">Work, Energy & Power - Exercise</a></li>
+                                
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+
+                <div id="flush-collapse-3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+
+                        <div class="d-md-flex">
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title"><a href="#">CLASS 6</a></li>
+                                <li><a class="text-white text-decoration-none"
+                                        href="https://www.pw.live/class-6-maths">Worksheet for
+                                        class 6 Math's</a></li>
+                                <li><a class="text-white text-decoration-none"
+                                        href="https://www.pw.live/class-6-science">Worksheet for
+                                        class 6 Science</a></li>
+
+                                <li class="megamenu-list-title"><a href="#">CLASS 7</a></li>
+                                <li><a class="text-white text-decoration-none"
+                                        href="https://www.pw.live/class-7-maths-worksheet">Worksheet
+                                        for Math's</a></li>
+                                <li><a class="text-white text-decoration-none"
+                                        href="https://www.pw.live/class-7-science-worksheets">Worksheet
+                                        for class 7 Science </a></li>
+                                <li><a class="text-white text-decoration-none"
+                                        href="https://www.pw.live/rs-aggarwal-class-7-solutions">RS
+                                        Aggarwal Solutions for Math's</a></li>
+
+                                <li class="megamenu-list-title"><a href="#">CLASS 8</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/worksheet-class-8">Worksheet for
+                                        Class 8 </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/sample-papers-for-class-8-maths">Sample
+                                        paper Class 8 Math's</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/sample-papers-class-8-science">Sample
+                                        papers class 8 science</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/cbse-important-questions-for-class-8-maths">Important
+                                        Questions Math's</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/mcq-questions-for-class-8-science-with-answers">Important
+                                        Questions Class 8 Science</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/rs-aggarwal-class-8-solutions">R.S
+                                        Aggarwal Class 8 Solution</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/lakhmir-singh-solution-for-class-8-science">lakhmirsingh
+                                        Solution for Science</a></li>
+
+                            </ul>
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title"><a href="#">CLASS 9</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/worksheet-class-9">Worksheet for
+                                        Class 9</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/rs-aggarwal-class-9-solutions">RS
+                                        Aggarwal solution </a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/rd-sharma-solutions-class-9">RD
+                                        Sharma Solution </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/ps-verma-and-vk-agarwal-biology-class-9-solution">PS
+                                        Verma &amp; VK Agarwal Biology Solutions </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/lakhmir-singh-solutions-class-9-physics">Lakhmir
+                                        Singh physics solutions</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/lakhmir-singh-solutions-class-9-chemistry">Lakhmir
+                                        Singh Chemistry Solutions</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/ncert-exemplar-class-9-maths">NCERT
+                                        Exemplar for Math's</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/important-questions-for-class-9-maths">CBSE
+                                        Important Questions Math's pdf</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/important-questions-for-class-9-science">MCQ
+                                        Questions Science with Answers</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/sample-papers-class-9-maths">CBSE
+                                        Sample Papers Math's </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/sample-papers-class-9-science">CBSE
+                                        Sample Papers Science </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/icse-class-9-maths-solutions">ICSE
+                                        Math's Solutions </a></li>
+
+                            </ul>
+
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title"><a href="#">CLASS 10</a>
+                                </li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/worksheet-class-10">Worksheet
+                                        for
+                                        class 10 </a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/vedic-maths">Vedic Math's</a>
+                                </li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/rs-aggarwal-class-10-solutions">RS
+                                        Agarwal's solutions</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/rd-sharma-class-10-solutions">RD
+                                        Sharma solutions </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/sample-paper-national-talent-search-examination">NTSE
+                                        Sample papers</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/ntse-previous-year-paper">NTSE
+                                        Previous year papers </a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/olympiad-questions">Olympiad
+                                        questions </a></li>
+
+                                <li class="megamenu-list-title"><a href="#">CLASS 11</a>
+                                </li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/kvpy-question-answers">KVPY
+                                        Previous Year Papers</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/sample-papers">Sample papers
+                                    </a>
+                                </li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/concepts-short-note-and-theory-of-physics">Revision
+                                        Notes for class 11 Physics </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/concepts-name-reactions-of-organic-chemistry">
+                                        Name Reactions of Organic chemistry </a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/biology-mcq-for-neet">Biology
+                                        MCQ
+                                    </a></li>
+                            </ul>
+
+
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title"><a href="#">CLASS 11</a>
+                                </li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/chemistry-questions-mcq">Chemistry
+                                        MCQ </a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/physics-questions-mcq">Physics
+                                        MCQ </a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/maths-questions">Math's MCQ </a>
+                                </li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/rd-sharma-solutions-class-11">RD
+                                        Sharma solutions</a></li>
+
+                                <li class="megamenu-list-title"><a href="#">CLASS 12</a>
+                                </li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/important-questions-class-12-maths">Important
+                                        Questions Math's</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/important-questions-class-12-physics">Important
+                                        Questions Physics </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/important-questions-class-12-chemistry">Important
+                                        Questions Chemistry </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/important-questions-class-12-biology">Important
+                                        Questions Biology </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/cbse-sample-papers-for-class-12">CBSE
+                                        Sample papers</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/previous-year-paper-class-12">CBSE
+                                        Previous year Papers</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/hc-verma-solutions">HC Verma
+                                        Solutions </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/rd-sharma-class-12-mathematics-solutions">RD
+                                        Sharma solutions</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+
+                <div id="flush-collapse-4" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body footer-menu-4-margin">
+
+                        <div class="d-md-flex">
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title"><a href="#">Entrance exam
+                                        Resourses</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/sample-papers">Sample papers for
+                                        Entrance exam</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/jee-mains-previous-year-papers">JEE
+                                        Main Previous Year papers</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/previous-year-jee-advanced-questions">JEE
+                                        Advance previous year papers</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/neet-previous-year-papers">NEET
+                                        Previous year papers</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/bitsat-previous-year-papers">BITSAT
+                                        previous year papers</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/olympiad-questions">Olympiad
+                                        previous year Papers</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/integer-type-questions-jee-main">Integer
+                                        Based Questions</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/biology-mcq-for-neet">Biology
+                                        MCQ
+                                        For NEET </a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/online-test">Questions class
+                                        wise</a></li>
+                            </ul>
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title"><a href="#">Entrance exam
+                                        Resourses</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/formula">Science formulas</a>
+                                </li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/chemistry-formulas">Chemistry
+                                        formulas </a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/physics-formula">Physics
+                                        formulas</a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/maths-formulas">Math's
+                                        Formulas</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/entrance-examination-jee-mains">About
+                                        JEE Main </a></li>
+                                <li><a class="topMenuSpacing" href="https://www.pw.live/entrance-examination-neet">About
+                                        NEET </a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/entrance-examination-bitsat">BITSAT</a>
+                                </li>
+
+                                <li class="megamenu-list-title"><a href="#">Entrance
+                                        exam</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/entrance-examination-jee-mains">JEE
+                                        Main</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/entrance-examination-neet">NEET</a>
+                                </li>
+
+                            </ul>
+                            <ul class="list-unstyled col">
+                                <li class="megamenu-list-title"><a href="#">Entrance
+                                        exam</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/entrance-examination-bitsat">BITSAT</a>
+                                </li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/engineering-entrance-examination">More
+                                        engineering exam</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/medical-entrance-examination">More
+                                        Medical Exam</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/other-entrance-examination">Olympiads
+                                        exam</a></li>
+
+                                <li class="megamenu-list-title"><a href="#">Study
+                                        Materials</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/icse-class-10-maths-solutions">Class
+                                        10 ICSE</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/concepts-short-notes-mind-map-and-theory-of-physics-class-12">Revision
+                                        Material Physics</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/concepts-zoology-short-notes-for-neet">Revision
+                                        Material Biology</a></li>
+                                <li><a class="topMenuSpacing"
+                                        href="https://www.pw.live/concepts-name-reactions-of-organic-chemistry">Name
+                                        reactions organic chemistry</a></li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+
+                <div id="flush-collapse-5" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body  footer-menu-5-margin">
+
+                        <div class="d-md-flex">
+                            <ul class="list-unstyled col">
+                                <li><a href="https://www.pw.live/board-upmsp">UP Board</a></li>
+                                <li><a href="https://www.pw.live/board-msbshse">Maharashtra State
+                                        Board</a>
+                                </li>
+                                <li><a href="https://www.pw.live/board-andhra-pradesh-education">AP Board
+                                    </a></li>
+                                <li><a href="https://www.pw.live/board-bihar">Bihar School Examination
+                                        Board Details</a></li>
+                                <li><a href="https://www.pw.live/board-gseb">Gujarat Board</a></li>
+                                <li><a href="https://www.pw.live/board-rajasthan">Rajasthan Board</a>
+                                </li>
+                                <li><a href="https://www.pw.live/board-mpbse">MP Board of Secondary
+                                        Education</a></li>
+                                <li><a href="https://www.pw.live/board-kseeb">Karnataka Examination
+                                        Board</a></li>
+                                <li><a href="https://www.pw.live/board-kbpe">Kerala Board</a></li>
+                                <li><a href="https://www.pw.live/board-tamil-nadu-state-board">Tamil Nadu
+                                        State Board</a></li>
+                                <li><a href="https://www.pw.live/board-telangana-board">Telangana Board of
+                                        Education</a></li>
+                                <li><a href="https://www.pw.live/board-west-bengal-board">West Bengal
+                                        Board</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="accordion-item">
+
+                <div id="flush-collapse-6" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body footer-menu-6-margin">
+
+                        <div class="d-md-flex">
+                            <ul class="list-unstyled col">
+                                <li><a href="https://www.youtube.com/channel/UCphU2bAGmw304CFAzy0Enuw">Physics Wallah
+                                        Foundation</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCD16eo98AXl-9T61Xd711kQ">Competition
+                                        Wallah</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCVJU_IChPMOe8RWkdVQjtfQ">JEE Wallah</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UC8zCnnfhz-dvIpVdZ1CheuA">NCERT Wallah</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UCcXUY9NSMyYbkOvUD97CUmA">PW Pathshala</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UC8OCoGX9tmMneOzIFUTWq2Q">Defence
+                                        Wallah</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCko6jJyo-wUQmWhjGNAIrwg">Physics Wallah -
+                                        English</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCEB_nGXf1l72k3-Jg92MTSw">PW - Hindi
+                                        Medium</a></li>
+                                <li><a href="https://www.youtube.com/channel/UC_AGMamcUlS2NpitJDoTSkw">PW Bangla</a>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled col">
+                                <li><a href="https://www.youtube.com/channel/UCn5N03prvdzaZxEwq3AtHAw">Commerce Wallah
+                                        by PW</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCh-8Skr8qxnAOihvqesz8jA">PW Vidyapeeth</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UCeex8hXWbegjhnWBtiT6I9g">PW
+                                        Maharashtra</a></li>
+                                <li><a href="https://www.youtube.com/channel/UC-nhrJo1nq0WNZ2N9TruWJg">PW Kannada</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UCv6AAqO9p0DfytWVlhKcpwQ">PW Gujarati</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UC75FLIaZUKqNoikF_7GJySw">PW Telugu</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UCXldsq6PYUwRajkYLzbiXVA">PW Sarkari
+                                        Exams</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCCSiRFqhn47QNSKCRZ5kkKw">PW Facts</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCF7yooS3ACc57ynnzS1E1GA">PW Little
+                                        Champs</a></li>
+                            </ul>
+                            <ul class="list-unstyled col">
+                                <li><a href="https://www.youtube.com/channel/UC2amkJX5zDyQJ0mDajAWRSA">CA Wallah by
+                                        PW</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCHMWQFr9Nwo3wJsAap2Wnfw">PW Insider</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UC9PoSJoftLvEnXT-PtQ5Wtw">GATE Wallah</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UCuGWIkiNaWjsCqybgxGuxfg">GATE Wallah - EE,
+                                        EC &amp; CS</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCGrrw9x3_B_fItUIBMvqAUw">GATE Wallah - ME,
+                                        CE &amp; XE</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCOsV75fSUr8gnMbhx-Qh3Lg">GATE Wallah
+                                        (English)</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCqOy6oOu6RPJNHYQ8f_Ybvg">UPSC Wallah</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UCDrf0V4fcBr5FlCtKwvpfwA">College
+                                        Wallah</a></li>
+                            </ul>
+                            <ul class="list-unstyled col">
+                                <li><a href="https://www.youtube.com/channel/UCUzqJZOkCejFoc5eqWWA9Eg">Teaching
+                                        Wallah</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCcaEVV7A47J4k9GFcqOOYkg">SSC Wallah</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UCg5_K50hLTKerLkSE7I1yWQ">Banking
+                                        Wallah</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCyf71tWV2abeN-l_UKiJ-5g">JEE Challengers
+                                        by PW</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCuj28Zll58sztDqLiDhzgtQ">PW IIT JAM &amp;
+                                        CSIR NET</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCWWEvCschv0T0rtou4VaKGw">MBA Wallah</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UCn2YaxoXROrVYorXagp2s8w">Alakh Pandey</a>
+                                </li>
+                                <li><a href="https://www.youtube.com/channel/UCmrP-DYdZuThp8AO9lnnwNw">UPSC Wallah -
+                                        Hindi Medium</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+
+                <div id="flush-collapse-7" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body footer-menu-7-margin">
+
+                        <div class="d-md-flex">
+                            <ul class="list-unstyled col">
+                                <li><a href="https://www.pw.live/online-test-class-six/class-6-science-notes">Online
+                                        Quiz for Class 6 Science</a></li>
+                                <li><a href="https://www.pw.live/online-test-class-six/class-6-maths">Online
+                                        Quiz for Class 6 Math's</a></li>
+                                <li><a href="https://www.pw.live/online-test-class-seven/class-7-mathematics">Online
+                                        test for class 7 Math's</a></li>
+                                <li><a href="https://www.pw.live/online-test-class-seven/science-class-seven">Online
+                                        test for class 7 Science</a></li>
+                                <li><a href="https://www.pw.live/online-test-class-eight/mathematics-class-eight">Chapter
+                                        wise Class 8 Math's Quiz</a></li>
+                                <li><a href="https://www.pw.live/online-test-class-eight">Chapter wise
+                                        Class 8 Science quiz </a></li>
+                                <li><a href="https://www.pw.live/online-test-class-ninth">Chapter wise
+                                        Online Quiz Class 9</a></li>
+                                <li><a href="https://www.pw.live/online-test-class-tenth">Chapter wise
+                                        online Quiz for class 10</a></li>
+                                <li><a href="https://www.pw.live/online-test-class-eleven">Chapter wise
+                                        Quiz for class 11</a></li>
+                                <li><a href="https://www.pw.live/online-test-class-twelve">Chapter wise
+                                        class 12 Quiz</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
